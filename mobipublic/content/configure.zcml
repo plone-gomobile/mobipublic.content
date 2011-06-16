@@ -19,7 +19,7 @@
        in Plone -->
   <genericsetup:registerProfile
       name="default"
-      title="Example Dexterity Product"
+      title="mobipublic.com site content types"
       directory="profiles/default"
       description="Extension profile for Example Dexterity Product"
       provides="Products.GenericSetup.interfaces.EXTENSION"

@@ -5,7 +5,7 @@ version = '1.0'
 
 setup(name='mobipublic.content',
       version=version,
-      description="Example Dexterity Product",
+      description="mobipublic.com site content types",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
