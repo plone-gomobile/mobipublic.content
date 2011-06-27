@@ -13,6 +13,10 @@
 
             <h1 tal:content="context/title" />
 
+            <div class="documentDescription">
+                <div tal:condition="python:context.Description().decode('utf-8') != u'None'" tal:replace="structure context/Description" />
+            </div>
+
             <div class="info-box">
                     <table>
                         <tbody> 
@@ -78,10 +82,6 @@
             </div>
 
             	  	   
-            <div class="documentDescription">
-                <div tal:condition="python:context.Description().decode('utf-8') != u'None'" tal:replace="structure context/Description" />
-            </div>
-
             <div tal:replace="structure context/bodyText" />
 
             <div style="clear:both"><!-- --></div>
