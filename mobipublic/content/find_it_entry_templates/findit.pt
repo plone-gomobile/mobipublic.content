@@ -7,10 +7,117 @@
       i18n:domain="mobipublic.content">
 <body>
 
-<metal:main fill-slot="content-core">
+<metal:main fill-slot="body">
+
   <metal:content-core define-macro="content-core">
 
-    <div tal:replace="structure context/bodyText" />
+            <h1 tal:content="context/title" />
+
+            <div class="info-box">
+                    <table>
+                        <tbody> 
+                        
+                            <tr>
+                                <th>
+                                   Contact info      
+                                </th>
+                            </tr>                       
+                            
+                            <tr>
+                                <td tal:content="context/address|nothing" />
+                            </tr>
+        
+                            <tr>
+                                <td tal:content="context/portalCode|nothing" />
+                            </tr>
+
+                            <tr>
+                                <td tal:content="context/city|nothing" />
+                            </tr>
+
+
+                            <tr tal:condition="python:view.getPhoneNumberLink() != None">
+                                <td>
+                                    <a tal:attributes="href view/getPhoneNumberLink" tal:content="context/phoneNumber" />
+                                    (primary)
+                                </td>
+                            </tr>
+
+                            <tr tal:condition="context/website">
+                                <td>
+                                    <a tal:attributes="href string:${context/website}" tal:content="context/website" />
+                                </td>
+                            </tr>
+
+                            
+                            <tr>
+                                <td>
+                                    <a tal:attributes="href string:mailto:${context/email}|string:''" tal:content="context/email|nothing" />
+                                </td>
+                            </tr>
+
+
+                            
+			    <!--
+                           <tr tal:condition="view/is_vcard_supported">
+                                <th>Digital business card</th>
+                            </tr>
+                            
+                            <tr tal:condition="view/is_vcard_supported">
+                                <td>
+                                        <a class="image-link" tal:attributes="href string:${context/absolute_url}/@@vcarddownload_view">
+                                                <img tal:attributes="src string:${context/portal_url}/++resource++plonetheme.mfabrik/dl.png" alt="" />
+                                        </a>
+                                        <a id ="dl-vcard" tal:attributes="href string:${context/absolute_url}/@@vcarddownload_view">Download vCard</a>
+                                </td>
+                            </tr>
+			    -->
+
+                        </tbody>
+                    </table>
+            </div>
+
+            	  	   
+            <div class="documentDescription">
+                <div tal:condition="python:context.Description().decode('utf-8') != u'None'" tal:replace="structure context/Description" />
+            </div>
+
+            <div tal:replace="structure context/bodyText" />
+
+            <div style="clear:both"><!-- --></div>
+           
+            <h2 i18n:translate="map">Location</h2>
+
+            <div tal:condition="view/is_landmark">
+                <p>
+                    <a tal:attributes="href string:${context/absolute_url}/@@poi_view" i18n:translate="open_map_nokia">
+                        Open in OVI Maps
+                    </a>
+                </p>
+            </div>
+
+            <div tal:condition="python: not view.is_landmark() and view.has_location()">
+                <p i18n:domain="gomobilietheme.mfabrik">
+                    <a tal:attributes="href string:${view/get_map_link}" i18n:translate="open_map_iphone">
+                        Open in Google Maps
+                    </a>
+                </p>
+            </div>
+
+           
+            <div id="map-wrapper" tal:define="lat view/latitude|nothing;
+                                              long view/longitude|nothing;
+                                              api_key view/get_google_map_api_key_for_current_domain"
+                 tal:condition="python: lat and long">
+            <img alt="Map"
+                tal:attributes="src string:http://maps.google.com/maps/api/staticmap?mobile=true&markers=size:mid|color:red|label:.|${lat},${long}&center=${lat},${long}&size=160x160&zoom=13&sensor=false&key=${api_key}"
+            />
+            </div>
+            
+            
+            <div style="clear:both"><!-- --></div>
+
+
     
   </metal:content-core>
 </metal:main>

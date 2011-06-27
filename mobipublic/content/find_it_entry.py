@@ -11,7 +11,12 @@ from mobipublic.content import MessageFactory as _
 from plone.app.textfield import RichText
 from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
 from plone.z3cform.textlines.textlines import TextLinesFieldWidget
+from Products.CMFCore.utils import getToolByName
 
+from mobile.heurestics import poi, simple
+from mobile.heurestics.vcard import is_vcard_supported 
+
+from gomobile.mobile.utilities import get_host
 # Interface class; used to define content-type schema.
 
 class IFindItEntry(form.Schema):
@@ -26,14 +31,15 @@ class IFindItEntry(form.Schema):
 
     address = schema.TextLine(title=u"Address", required=False)
     postalCode = schema.TextLine(title=u"Postal code", required=False)
+    city = schema.TextLine(title=u"City", required=False)
     
-    latitude = schema.TextLine(title=u"Latitude", required=False)
-    longitude = schema.TextLine(title=u"Longitude", required=False)
+    latitude = schema.Float(title=u"Latitude", required=False, description=u"Required for mini map")
+    longitude = schema.Float(title=u"Longitude", required=False, description=u"Required for mini map")
     
-    website = schema.TextLine(title=u"Website", required=False)
+    website = schema.TextLine(title=u"Website", required=False, description=u"Must start with http://")
     email = schema.TextLine(title=u"Email", required=False)
-    phoneNumber = schema.TextLine(title=u"Phone number (primary)", required=False)
-    phoneNumber2 = schema.TextLine(title=u"Phone number (secondary)", required=False)
+    phoneNumber = schema.TextLine(title=u"Phone number (primary)", description=u"Must be in international format and start with +", required=False)
+    phoneNumber2 = schema.TextLine(title=u"Phone number (secondary)", description=u"Must be in international format and start with +",required=False)
     
     tags = schema.TextLine(title=u"Phone number (secondary)", required=False)
 
@@ -72,3 +78,78 @@ class FindIt(grok.View):
     grok.require('zope2.View')
     
     # grok.name('view')
+    
+    def get_property(self, property_name, default=None):
+        """ Get property of a given name from the the site setting """
+        
+        portal_properties = getToolByName(self, 'portal_properties')
+        properties = portal_properties.mobipublic_properties        
+        return getattr(properties, property_name, default)
+            
+    
+    def get_google_map_api_key_for_current_domain(self):
+        """
+        Some magic to fetch domain specific Maps API key.
+        
+        You need API key as google_map_api_key_en or google_map_api_key_mobipublic_com
+        """
+        
+        host = get_host(self.request)
+        
+        domain = host.split(":")[0]        
+        domain = domain.replace(".","_")
+                                        
+        property_name = "google_map_api_key_" + domain
+        print "Map key property:" + property_name
+        
+        key = self.get_property(property_name)
+        print "Got key:" + str(key)
+
+        return key
+
+    def latitude(self):
+        return self.context.latitude
+    
+    def longitude(self):
+        return self.context.longitude
+    
+    def has_location(self):
+        """
+        """
+        return self.context.longitude != None and self.context.latitude != None 
+
+    def is_landmark(self):
+        if not self.has_location():
+            return False
+        return poi.get_poi_type(self.request) == "landmark"
+
+    def is_map_link(self):
+        if not self.has_location():
+            return False
+        return poi.get_poi_type(self.request) == "href"
+
+    def get_map_link(self):
+        
+        try:
+            lat = float(self.context.latitude)
+            long = float(self.context.longitude)
+        except:
+            # Avoid possible float formatting problems
+            lat = 0
+            long = 0
+            
+        return poi.get_google_maps_link(lat, long)
+    
+    def getPhoneNumberLink(self):
+        
+        if self.context.phoneNumber == None or self.context.phoneNumber == "":
+            return None
+        
+        helper = self.context.unrestrictedTraverse("phone_number_formatter")
+        return helper.format(self.context.phoneNumber)
+    
+    
+    def is_vcard_supported(self):
+        supported = is_vcard_supported(self.request)
+        return supported
+    
