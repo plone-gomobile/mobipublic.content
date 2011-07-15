@@ -7,21 +7,27 @@
       i18n:domain="mobipublic.content">
 <body>
 
-<metal:main fill-slot="content-core">
-  <metal:content-core define-macro="content-core">
+<metal:main fill-slot="main">
+  <metal:content-core define-macro="main">
 
     <div class="link-data">
 
-            <a tal:attributes="href context/remoteUrl" tal:content="context/title">             
-	       <img tal:condition="view/hasImage" tal:attributes="href string:${context/absolute_url}/@@download/screenshot/${screenshot/filename}" />
-	    </a>
+            <a class="image-link" tal:attributes="href context/remoteUrl">          
+	       
+		<img tal:define="scales context/@@images;
+		                 screenshot python: scales.scale('screenshot', width=64, height=64);"
+		     tal:condition="screenshot"
+		     tal:attributes="src screenshot/url;
+		                     width screenshot/width;
+		                     height screenshot/height" />	    
+            </a>
 	     
-	    <h1>
+	    <h1 class="text-heading">
 		    <a tal:attributes="href context/remoteUrl" tal:content="context/title">	    	
 		    </a>
 	    </h1>    
 	    
-	    <p class="documentDescription" tal:content="content/description" />
+	    <p class="documentDescription" tal:content="context/description" />
 
             <div style="clear: both"><!-- --></div>
     </div>

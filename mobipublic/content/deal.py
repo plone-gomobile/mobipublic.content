@@ -16,7 +16,7 @@ class IDeal(form.Schema):
     Deals and discounts item
     """
     
-    validUntil = schema.Date(title=u"Valid until")
+    validUntil = schema.Datetime(title=u"Valid until")
     
     company = schema.TextLine(title=u"Company", required=False)
     
