@@ -15,7 +15,7 @@
             <a class="image-link" tal:attributes="href context/remoteUrl">          
 	       
 		<img tal:define="scales context/@@images;
-		                 screenshot python: scales.scale('screenshot', width=64, height=64);"
+		                 screenshot python: scales.scale('screenshot', width=200, height=200);"
 		     tal:condition="screenshot"
 		     tal:attributes="src screenshot/url;
 		                     width screenshot/width;
