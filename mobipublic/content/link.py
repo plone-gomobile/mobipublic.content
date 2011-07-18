@@ -32,6 +32,10 @@ class Link(dexterity.Item):
     def getRemoteUrl(self):
         """ Indexing compatibility moethod """
         return self.remoteUrl
+    
+    def remote_url(self):
+        """ Compatiblity method with FeedfeederItem """
+        return self.remoteUrl
 
 # View class
 # The view will automatically use a similarly named template in
