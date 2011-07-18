@@ -29,6 +29,9 @@ class Link(dexterity.Item):
     
     # Add your class methods and properties here
 
+    def getRemoteUrl(self):
+        """ Indexing compatibility moethod """
+        return self.remoteUrl
 
 # View class
 # The view will automatically use a similarly named template in
