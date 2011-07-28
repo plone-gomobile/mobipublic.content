@@ -24,7 +24,9 @@ class IDeal(form.Schema):
     
     email = schema.TextLine(title=u"Email", required=False)
     
-    phoneNumber = schema.TextLine(title=u"Phone", required=False)
+    phoneNumber = schema.TextLine(title=u"Primary number", required=False)
+    
+    otherPhoneNumbers = schema.TextLine(title=u"Other phone numbers", required=False)
     
     address = schema.TextLine(title=u"Address", required=False)
     

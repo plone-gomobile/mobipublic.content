@@ -41,6 +41,13 @@
                                     <a tal:attributes="href view/getPhoneNumberLink" tal:content="context/phoneNumber" />
                                 </td>
                             </tr>
+			    
+                            <tr tal:condition="python:context.otherPhoneNumbers != None">                                
+			        <td>
+                                    <span>Other contact numbers:</span><span tal:content="context/otherPhoneNumbers" />
+                                </td>
+                            </tr>
+
 
                             <tr tal:condition="context/website">
                                 <td>
