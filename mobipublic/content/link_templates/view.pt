@@ -32,7 +32,14 @@
             <div style="clear: both"><!-- --></div>
     </div>
     
-    <div tal:replace="structure context/socialbar" />
+      <a name="discussion"></a>        
+
+      <div tal:replace="structure context/socialbar" />
+
+      <div tal:replace="structure context/@@viewlets/plone.comments" />
+          
+      <div tal:replace="structure provider:plone.documentactions" />
+    
     
   </metal:content-core>
 </metal:main>
