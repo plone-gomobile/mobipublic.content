@@ -16,6 +16,12 @@
             <div class="documentDescription">
                 <div tal:condition="python:context.Description().decode('utf-8') != u'None'" tal:replace="structure context/Description" />
             </div>
+	    
+	    <div class="opening-times" tal:condition="context/openingTimes">
+	    	<div class="entry" tal:repeat="entry python:context.openingTimes.split('\n')">
+	    		<span tal:content="entry" />
+	    	</div>
+	    </div>
 
             <div class="info-box">
                     <table>

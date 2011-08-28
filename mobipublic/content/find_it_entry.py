@@ -42,6 +42,8 @@ class IFindItEntry(form.Schema):
     phoneNumber2 = schema.TextLine(title=u"Phone number (secondary)", description=u"Must be in international format and start with +",required=False)
     
     tags = schema.TextLine(title=u"Phone number (secondary)", required=False)
+    
+    openingTimes = schema.Text(title=u"Opening hours", description=u"One day per line - free format", required=False)
 
     form.widget(tags=TextLinesFieldWidget)
     tags = schema.List(
