@@ -7,11 +7,21 @@
       i18n:domain="mobipublic.content">
 <body>
 
-<metal:main fill-slot="body">
+<metal:main fill-slot="main">
 
   <metal:content-core define-macro="content-core">
 
             <h1 tal:content="context/title" />
+
+            <a class="image-link" tal:condition="context/website" tal:attributes="href context/website">          
+               
+                <img tal:define="scales context/@@images;
+                                 image python: scales.scale('image', width=200, height=200);"
+                     tal:condition="image"
+                     tal:attributes="src image/url;
+                                     width image/width;
+                                     height image/height" />           
+            </a>
 
             <div class="documentDescription">
                 <div tal:condition="python:context.Description().decode('utf-8') != u'None'" tal:replace="structure context/Description" />

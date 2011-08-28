@@ -8,7 +8,7 @@ from plone.app.z3cform.wysiwyg import WysiwygFieldWidget
 
 from mobipublic.content import MessageFactory as _
 
-
+from plone.namedfile.field import NamedImage
 # Interface class; used to define content-type schema.
 
 class IDeal(form.Schema):
@@ -35,6 +35,10 @@ class IDeal(form.Schema):
     city = schema.TextLine(title=u"City", required=False)
      
     contactPerson = schema.TextLine(title=u"Contact person", required=False)
+    
+    image = NamedImage(title=u"Image", 
+                               description=u"Will be automatically resized", 
+                               required=False)
     
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
