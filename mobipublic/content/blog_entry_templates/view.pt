@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="mobipublic.content">
+<body>
+
+<metal:main fill-slot="main">
+
+  <metal:content-core define-macro="content-core">
+
+            <h1 tal:content="context/title" />
+           
+            <img tal:define="scales context/@@images;
+                         image python: scales.scale('image', width=200, height=200);"
+             tal:condition="image"
+             tal:attributes="src image/url;
+                             width image/width;
+                             height image/height" />           
+
+            <div class="documentDescription">
+                <div tal:condition="python:context.Description().decode('utf-8') != u'None'" tal:replace="structure context/Description" />
+            </div>
+
+            <div tal:replace="structure context/bodyText" />                                           
+    
+            <div tal:replace="structure context/socialbar" />
+
+    
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+

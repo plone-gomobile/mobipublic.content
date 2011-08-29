@@ -8,6 +8,7 @@
   -->
 <object name="portal_types" meta_type="Plone Types Tool">
   <!-- -*- extra stuff goes here -*- -->
+  <object name="mobipublic.content.blogentry" meta_type="Dexterity FTI" />
   <object name="mobipublic.content.link" meta_type="Dexterity FTI" />
   <object name="mobipublic.content.finditentry" meta_type="Dexterity FTI" />
   <object name="mobipublic.content.deal" meta_type="Dexterity FTI" />
