@@ -1,0 +1,94 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="mobipublic.content">
+<body>
+
+<metal:main fill-slot="body">
+
+  <metal:content-core define-macro="content-core">
+  		
+            <a class="image-link" tal:condition="context/website" tal:attributes="href context/website">          
+               
+                <img tal:define="scales context/@@images;
+                                 image python: scales.scale('image', width=200, height=200);"
+                     tal:condition="image"
+                     tal:attributes="src image/url;
+                                     width image/width;
+                                     height image/height" />           
+            </a>
+
+            <h1 tal:content="context/Title" />
+            
+            <p class="documentDescription" tal:content="context/Description" />
+        
+	    
+            <div class="opening-times" tal:condition="context/openingTimes">
+                <div class="entry" tal:repeat="entry python:context.openingTimes.split('\n')">
+                        <span tal:content="entry" />
+                </div>
+            </div>
+
+            <div class="info-box">
+                    <table>
+                        <tbody> 
+                        
+                            <tr>
+                                <th>
+                                   Contact info      
+                                </th>
+                            </tr>                       
+                            
+                            <tr>
+                                <td tal:content="context/address|nothing" />
+                            </tr>
+        
+                            <tr>
+                                <td tal:content="context/portalCode|nothing" />
+                            </tr>
+
+                            <tr>
+                                <td tal:content="context/city|nothing" />
+                            </tr>
+
+
+                            <tr tal:condition="python:view.getPhoneNumberLink() != None">
+                                <td>
+                                    <a tal:attributes="href view/getPhoneNumberLink" tal:content="context/phoneNumber" />
+                                    (primary)
+                                </td>
+                            </tr>
+
+                            <tr tal:condition="context/website">
+                                <td>
+                                    <a tal:attributes="href string:${context/website}" tal:content="context/website" />
+                                </td>
+                            </tr>
+
+                            
+                            <tr>
+                                <td>
+                                    <a tal:attributes="href string:mailto:${context/email}|string:''" tal:content="context/email|nothing" />
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+            </div>
+
+                           
+            <div tal:replace="structure context/bodyText|nothing" />
+
+            <div style="clear:both"><!-- --></div>
+          
+    
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+
