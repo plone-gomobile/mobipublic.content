@@ -43,9 +43,11 @@ NB:  Placing security assestions within the package/module you are trying
 from AccessControl import allow_module, allow_class, allow_type
 from AccessControl import ModuleSecurityInfo
 
-#Allow datetime so we can use it in the formfolder custom script adapter
-#Dexterity dates are datetime so we need it
-allow_module('datetime')
+from Products.ATContentTypes.utils import DT2dt
+
+#Dexterity dates are datetime so we need these
+allow_module ("Products.ATContentTypes.utils")
+allow_class(DT2dt)
 
 # These modules are pretty safe
 
