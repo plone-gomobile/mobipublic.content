@@ -44,6 +44,7 @@ from AccessControl import allow_module, allow_class, allow_type
 from AccessControl import ModuleSecurityInfo
 
 from Products.ATContentTypes.utils import DT2dt
+allow_module('strptime')
 
 #Dexterity dates are datetime so we need these
 allow_module ("Products.ATContentTypes.utils")
