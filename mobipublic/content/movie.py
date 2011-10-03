@@ -28,6 +28,10 @@ class IMovie(form.Schema):
     phoneNumber = schema.TextLine(title=u"Primary number", required=False)
     
     otherPhoneNumbers = schema.TextLine(title=u"Other phone numbers", required=False)
+
+    location = schema.TextLine(title=u"Location", required=False)
+
+    screen = schema.TextLine(title=u"Screen", required=False)
     
     address = schema.TextLine(title=u"Address", required=False)
     
