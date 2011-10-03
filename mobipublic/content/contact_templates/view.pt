@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="mobipublic.content">
+<body>
+
+<metal:main fill-slot="main">
+  <metal:content-core define-macro="main">
+
+    <div class="contact-data">
+	     
+       <h1 class="text-heading" tal:content="context/Title"></h1>    
+	    
+       <a tal:attributes="href view/getPhoneNumberLink" tal:content="context/phoneNumber" />
+       <br />
+       <a tal:attributes="href view/getMobileNumberLink" tal:content="context/mobileNumber" />
+
+      <div style="clear:both"><!-- --></div>
+
+    </div>
+    
+      <a name="discussion"></a>        
+
+      <div tal:replace="structure context/socialbar" />
+
+      <div tal:replace="structure provider:plone.documentactions" />
+    
+    
+  </metal:content-core>
+</metal:main>
+
+</body>
+</html>
+

@@ -11,6 +11,7 @@
   <object name="mobipublic.content.movie" meta_type="Dexterity FTI" />
   <object name="mobipublic.content.blogentry" meta_type="Dexterity FTI" />
   <object name="mobipublic.content.link" meta_type="Dexterity FTI" />
+  <object name="mobipublic.content.contact" meta_type="Dexterity FTI" />
   <object name="mobipublic.content.finditentry" meta_type="Dexterity FTI" />
   <object name="mobipublic.content.deal" meta_type="Dexterity FTI" />
 </object>
