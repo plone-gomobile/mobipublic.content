@@ -11,7 +11,7 @@
 
   <metal:content-core define-macro="content-core">
   		
-            <a class="image-link" tal:condition="context/website" tal:attributes="href context/website">          
+            <!--a class="image-link" tal:condition="context/website" tal:attributes="href context/website">          
                
                 <img tal:define="scales context/@@images;
                                  image python: scales.scale('image', width=200, height=200);"
@@ -19,7 +19,7 @@
                      tal:attributes="src image/url;
                                      width image/width;
                                      height image/height" />           
-            </a>
+            </a-->
 
             <h1 tal:content="context/Title" />
             
@@ -33,55 +33,8 @@
             </div>
 
             <div class="info-box">
-                    <table>
-                        <tbody> 
-                        
-                            <tr>
-                                <th>
-                                   Contact info      
-                                </th>
-                            </tr>                       
-                            
-                            <tr>
-                                <td tal:content="context/address|nothing" />
-                            </tr>
-        
-                            <tr>
-                                <td tal:content="context/portalCode|nothing" />
-                            </tr>
-
-                            <tr>
-                                <td tal:content="context/city|nothing" />
-                            </tr>
-
-
-                            <tr tal:condition="python:view.getPhoneNumberLink() != None">
-                                <td>
-                                    <a tal:attributes="href view/getPhoneNumberLink" tal:content="context/phoneNumber" />
-                                    (primary)
-                                </td>
-                            </tr>
-
-                            <tr tal:condition="context/website">
-                                <td>
-                                    <a tal:attributes="href string:${context/website}" tal:content="context/website" />
-                                </td>
-                            </tr>
-
-                            
-                            <tr>
-                                <td>
-                                    <a tal:attributes="href string:mailto:${context/email}|string:''" tal:content="context/email|nothing" />
-                                </td>
-                            </tr>
-
-
-                        </tbody>
-                    </table>
-            </div>
-
-                           
-            <div tal:replace="structure context/bodyText|nothing" />
+                <span>Location: <span tal:content="context/location|nothing" /></span><br />
+                <span>Screen: <span tal:content="context/screen|nothing" /></span>
 
             <div style="clear:both"><!-- --></div>
           

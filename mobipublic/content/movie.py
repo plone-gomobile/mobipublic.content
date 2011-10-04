@@ -21,29 +21,33 @@ class IMovie(form.Schema):
     """
     
         
-    website = schema.TextLine(title=u"Website", required=False)
+    #website = schema.TextLine(title=u"Website", required=False)
     
-    email = schema.TextLine(title=u"Email", required=False)
+    #email = schema.TextLine(title=u"Email", required=False)
     
-    phoneNumber = schema.TextLine(title=u"Primary number", required=False)
+    #phoneNumber = schema.TextLine(title=u"Primary number", required=False)
     
-    otherPhoneNumbers = schema.TextLine(title=u"Other phone numbers", required=False)
+    #otherPhoneNumbers = schema.TextLine(title=u"Other phone numbers", required=False)
 
     location = schema.TextLine(title=u"Location", required=False)
 
-    screen = schema.TextLine(title=u"Screen", required=False)
+    screen = schema.Choice(
+            title=u"Screen",
+            values=(1,2,3,4,5,6),
+            required=True
+        )
     
-    address = schema.TextLine(title=u"Address", required=False)
+    #address = schema.TextLine(title=u"Address", required=False)
     
-    postalCode = schema.TextLine(title=u"Postal code", required=False)
+    #postalCode = schema.TextLine(title=u"Postal code", required=False)
     
-    city = schema.TextLine(title=u"City", required=False)
+    #city = schema.TextLine(title=u"City", required=False)
      
-    contactPerson = schema.TextLine(title=u"Contact person", required=False)
+    #contactPerson = schema.TextLine(title=u"Contact person", required=False)
     
-    image = NamedImage(title=u"Image", 
-                               description=u"Will be automatically resized", 
-                               required=False)
+    #image = NamedImage(title=u"Image", 
+    #                           description=u"Will be automatically resized", 
+    #                           required=False)
     
     openingTimes = schema.Text(title=u"Opening hours", description=u"One day per line - free format", required=False)
     
@@ -70,11 +74,3 @@ class View(grok.View):
     grok.require('zope2.View')
     
     # grok.name('view')
-    
-    def getPhoneNumberLink(self):
-        
-        if self.context.phoneNumber == None or self.context.phoneNumber == "":
-            return None
-        
-        helper = self.context.unrestrictedTraverse("phone_number_formatter")
-        return helper.format(self.context.phoneNumber)
