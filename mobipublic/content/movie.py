@@ -29,7 +29,7 @@ class IMovie(form.Schema):
     
     #otherPhoneNumbers = schema.TextLine(title=u"Other phone numbers", required=False)
 
-    location = schema.TextLine(title=u"Location", required=False)
+    location = schema.TextLine(title=u"Location", required=True)
 
     screen = schema.Choice(
             title=u"Screen",
