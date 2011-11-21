@@ -18,6 +18,10 @@ class IDeal(form.Schema):
     
     validUntil = schema.Datetime(title=u"Valid until")
     
+    showValidUntil = schema.Bool(title=u"Show valid until", 
+                                 default=True, 
+                                 description=u"Hide valid until date from visitors (set long valid until and uncheck this for infinite)")
+    
     company = schema.TextLine(title=u"Company", required=False)
     
     website = schema.TextLine(title=u"Website", required=False)
@@ -40,6 +44,7 @@ class IDeal(form.Schema):
                                description=u"Will be automatically resized", 
                                required=False)
     
+    
 # Custom content-type class; objects created for this content type will
 # be instances of this class. Use this class to add content-type specific
 # methods and properties. Put methods that are mainly useful for rendering
@@ -50,6 +55,12 @@ class Deal(dexterity.Item):
     
     # Add your class methods and properties here
 
+    def getVisitorValidUntil(self):
+        """ Get visitor visible valid until value """
+        if self.showValidUntil:
+            return self.validUntil
+        
+        return None
 
 # View class
 # The view will automatically use a similarly named template in
