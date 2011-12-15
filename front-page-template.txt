@@ -1,0 +1,50 @@
+<div class="add-banners">
+<script type='text/javascript'><!--// <![CDATA[
+    /* [id227657] mobipublic.com - front page top */
+    OA_show(227657);
+// ]]> --></script><noscript><a target='_blank' href='http://d1.openx.org/ck.php?n=12cb0ea'><img border='0' alt='' src='http://d1.openx.org/avw.php?zoneid=227657&amp;n=12cb0ea' /></a></noscript>
+</div>
+
+<h1>Trending...</h1>
+
+{{ front_page_block('lifestyle-and-entertainment', 'FeedFeederItem', None, 'FeedfeederFolder', 'Entertainment & Lifestyle', '', 5, 0) }}
+
+<p></p>
+
+<h2><a href="news/fashion-lifestyle/weekly-trend" style="color:black">Fashion Weekly Trends</a></h2>
+
+{{ front_page_block('news/fashion-lifestyle', 'mobipublic.content.blogentry', None, '', '', '', 5, 0) }}
+
+<h2><a href="news/fashion-lifestyle" style="color:black">Fashion News</a></h2>
+
+{{ front_page_block('news/fashion-lifestyle', 'FeedFeederItem', None, '', '', '', 5, 0) }}              
+
+<p></p>
+
+{{ deals() }}
+
+<p></p>
+
+
+<h1>Hot news...</h1>
+
+
+{{ front_page_block('news/politics', 'FeedFeederItem', None, 'FeedFeederFolder', 'Politics', 'News by category', 3, 0) }}
+
+{{ front_page_block('news/business', 'FeedFeederItem', None, 'FeedFeederFolder', 'Business', 'News by category', 3, 0) }}
+
+{{ front_page_block('news', 'FeedFeederItem', None, 'FeedfeederFolder', '', 'All News', 0, 99) }}
+
+<p></p>
+
+<h2><a href="directory" style="color: black">Mobile Site Directory</a></h2>
+
+<a href="directory">Check out the best mobile sites in Kenya and the world</a>
+
+<p></p>
+
+
+<!-- p></p>
+<a href="{{ context.portal_url.getPortalObject()['ads']['front-page-bottom'].remoteUrl }}">
+<img style="width: 100%" src="{{ portal_url() }}/ads/front-page-bottom/@@download/screenshot" />
+</a -->
